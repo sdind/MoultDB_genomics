@@ -16,9 +16,6 @@ import time
 from Bio import Entrez
 import urllib.error
 
-#fasta_file = "/Users/sagane/Desktop/test/GCF_021234035.1_SC_F0-13Bv2_filtered.faa"
-#fasta_file = "/Users/sagane/Desktop/test/GCA_004104545.1_Arma_vul_BF2787_filtered.faa"
-#output_file = "/Users/sagane/Desktop/test/test2.tsv"
 
 def process_result(result):
     """

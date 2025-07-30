@@ -25,15 +25,6 @@ columns_to_select = [
     'Total genes', 'Arthropoda Complete BUSCO', 'Arthropoda Single BUSCO', 'Arthropoda Duplicated BUSCO',
     'Arthropoda Fragmented BUSCO', 'Arthropoda Missing BUSCO'
 ]
-
-
-#columns_to_select = [
-#    'Genbank Accession', 'Refseq Accession', 'Submission Date', 'Bioproject', 'Organism Name', 'Strain', 'TaxId', 'SubPhylum', 'Order', 'Assembly Level',
-#    'Total length', 'Number of contigs', 'Contig N50', 'Contig L50', 'Number of scaffolds',
-#    'Scaffold N50', 'Scaffold L50', 'Total genes', 'Protein-coding genes', 'Pseudogenes', 'Non-coding genes', 'Arthropoda Complete BUSCO', 
-#    'Arthropoda Single BUSCO', 'Arthropoda Duplicated BUSCO', 'Arthropoda Fragmented BUSCO',
-#    'Arthropoda Missing BUSCO'
-#]
 selected_data = filtered_df[columns_to_select]
 
 # Write the output file

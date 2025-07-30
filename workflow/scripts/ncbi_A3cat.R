@@ -18,11 +18,6 @@ names(A3cat) <- base::gsub('\\s+', '_', names(A3cat))
 A3cat <- mutate(A3cat, Annotation_Date = as.character(Annotation_Date))
 A3cat$Assembly_Name <- base::gsub('\\s+', '_', A3cat$Assembly_Name)
 A3cat$Species <- base::gsub('\\s+', '_', A3cat$Species)
-#A3cat[A3cat == "na"] <- NA
-#A3cat$Refseq_Accession[A3cat$Refseq_Accession == "na"] <- NA
-#A3cat$Genbank_Accession[A3cat$Genbank_Accession == "na"] <- NA
-#A3cat$Annotation_Date[A3cat$Annotation_Date == "na"] <- NA
-#A3cat$Refseq_Category[A3cat$Refseq_Category == "na"] <- NA
 
 ## Data quick inspection 
 

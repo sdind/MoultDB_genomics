@@ -13,7 +13,6 @@ def retrieve_metadata_and_domains(wildcards):
 
     return metadata_tables + domain_files
 
-# j'ai l'impression que dabord les domaines vont se lancer puis ensuite les metadata ! a verifier car si c'est le cas c'est pas partqiue
 
 rule all:
     input:

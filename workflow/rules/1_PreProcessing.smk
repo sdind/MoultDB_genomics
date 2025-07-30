@@ -2,7 +2,6 @@ import os
 import glob
 
 
-
 rule a3cat_filtering:
     """
     This rule refines the A3cat table by selecting the highest-quality genome assemblies.
@@ -27,7 +26,6 @@ rule a3cat_filtering:
         runtime = '01:00:00'
     shell:
         "Rscript workflow/scripts/ncbi_A3cat.R {input.a3cat_table}"
-
 
 
 
@@ -169,15 +167,6 @@ def get_filtered_proteome_names(wildcards):
 
 
 
-#rule all_filtered_proteomes:
-#    input:
-#        get_filtered_proteome_names
-#    output:
-#        touch("results/Proteomes/filtered_isoforms/filtered_proteomes.done")
-
-# peut etre que mtn on pourra enfait effacce ici def get_filtered_proteome_names et rulle  all
-
-
 
 rule process_fasta_labels:
     '''
@@ -205,8 +194,7 @@ rule process_fasta_labels:
             #rm ${{genome}}
         done
         """
-## to change later: genome:0:15 not robust (Giulia's command), to change with regex
-# and delete all file when worwflow is done
+## to change later: genome:0:15 not robust (Giulia's command), to change with regex + delete all files when workflow is done
 
 
 
@@ -264,15 +252,14 @@ rule run_orthologer_S1:
         cp ../../../{input.path2proteome} .
         {params.orthologer_dir}/manage_project.sh -s -f path2proteome.tsv
         {params.script_prompt}
-        ./setup_project_sdind2.sh     # to change in the future to be more robuste !!
+        ./setup_project_sdind2.sh     # to change in the future to be more robust !!
         cp /work/FAC/FBM/DEE/mrobinso/moult/giulia/orthologer_v3/orthologer_3.0.2/ORTHOLOGER-3.0.2/orthologer_conf.sh .
         PYTHON3_PATH=$(which python3)
         sed -i "s|PYTHON3=\"/work/FAC/FBM/DEE/mrobinso/moult/giulia/mambaforge/envs/orthologer_040923/bin/python3\"|PYTHON3=\"$PYTHON3_PATH\"|" orthologer_conf.sh 
         ./orthologer.sh -xp
         ./orthologer.sh -r all
         """
-# voir si on split la regle en plusieur et aussi faudra l'ameliorer car pas robuste avec path specific sdind2
-# srm mettre orthologer_conf.sh dans script plutot
+
 
 rule reformat_OG_out:
     input:
@@ -312,6 +299,7 @@ rule run_filter_OGs:
         "Rscript {params.script_gcne} {input.Dmel_moultgene} {input.pyhlo_tsv} {input.OGs} {output.filtered_OGs_pathways}"
 
 
+
 rule add_genome_ids_and_pathway_info:
     input:
         filtered_OGs_pathways = "results/orthologer/mydata/Results/loger_og_id_moult.tsv",
@@ -339,31 +327,6 @@ rule add_genome_ids_and_pathway_info:
             NR==FNR || FNR>1 {{print $0, genome_map[$3], pathway_info[$5]}}' {input.genomes_map} path_voc_tab.tsv {input.filtered_OGs_pathways} > {output.pathways_output}
         """
 
-
-
-#rule add_genome_ids:
-#    '''
-#    Adds genome IDs to the filtered orthogroup data, linking each orthogroup entry to specific genomes via taxonomy ID mappings.
-#    '''
-#    input:
-#        filtered_OGs_pathways = "results/orthologer/mydata/Results/loger_og_id_moult.tsv",
-#        genomes_map = "results/a3cat/genomes_map.tsv",
-#    output:
-#        pathways_output = "results/moultDB_input/prot_moult_pathways.tsv"
-#    log:
-#        "logs/moultDB_input/add_genome_ids.log"
-#    params:
-#        runtime = '00:10:00'
-#    threads: 1
-#    resources:
-#        mem_mb = 2000
-#    shell:
-#        """
-#        awk 'BEGIN {{FS=OFS="\t"}} 
-#            NR==FNR {{map[$2]=$1; next}} 
-#            FNR==1 {{print $0, "genome_id"; next}} 
-#            {{print $0, map[$3]}}' {input.genomes_map} {input.filtered_OGs_pathways} > {output.pathways_output}
-#        """
 
 
 

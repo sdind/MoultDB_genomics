@@ -94,35 +94,3 @@ new_result_table <- result_table %>% rename(protein_id = ncbi_id)
 write.table(new_result_table, file = output, sep="\t", row.names = FALSE, quote = FALSE)
 
 
-#### FOr now all I skip all this part, need to come back to it !! 
-
-# ## Quantification of gene copy number per species (entire OG dataset)
-
-# loger_counts <- count(loger_out, cluster_id, taxid)
-# expand <- tidyr::expand(loger_counts,  cluster_id, phylogeny$TaxId)
-# expand$key <- base::paste(expand$cluster_id, expand$`phylogeny$TaxId`, sep = "_") #considering species included in the analysis where putative orthologs were not detected (0 counts)
-# loger_counts$key <- base::paste(loger_counts$cluster_id, loger_counts$taxid, sep = "_")
-# loger_counts <- dplyr::left_join(expand, loger_counts, by = c("key" = "key"))%>%
-#   dplyr::select(cluster_id.x, `phylogeny$TaxId`, n)%>%
-#   tidyr::replace_na(list(n = 0L))
-# loger_counts <- dplyr::rename(loger_counts, taxid = `phylogeny$TaxId`, cluster_id =cluster_id.x)
-# loger_counts <- left_join(loger_counts, phylogeny, by = c("taxid" = "TaxId"))
-
-# # median counts by order
-# loger_median_counts <- loger_counts%>% group_by(cluster_id, Order) %>% summarise(median_count_by_order = median(n))
-# large_variation <-  loger_median_counts %>% group_by(cluster_id) %>% summarise(max_min_diff = max(median_count_by_order)-min(median_count_by_order)) #cafe developers suggest to remove families with much variation between species
-
-# ## Writing inputs for downstream analysis
-
-# # cafe
-# to_exclude <- filter(loger_median_counts,median_count_by_order >= 100)$cluster_id #cafe developers suggest to remove counts with at least 100 copies
-
-# loger4cafe <- filter(loger_median_counts, !cluster_id %in% to_exclude)
-# loger4cafe <- as.data.frame(tidyr::pivot_wider(loger4cafe, names_from = Order, values_from = median_count_by_order))
-# loger4cafe <- select(loger4cafe, -not_timetree_orders$X1)
-# loger4cafe <- mutate(loger4cafe, id =  paste("cluster",loger4cafe$cluster_id, sep="_")) %>%  relocate(id, .after = cluster_id)
-# write.table(loger4cafe, file = "Workdir/loger4cafe.tsv", sep = "\t", row.names = FALSE, quote = F)
-
-#aside_large_variation <- filter(large_variation, max_min_diff >= 60)$cluster_id
-#loger4cafe_nolarge <- filter(loger4cafe, !cluster_id %in% aside_large_variation)
-#write.table(loger4cafe_nolarge, file = "Workdir/loger4cafe_nolarge.tsv", sep = "\t", row.names = FALSE, quote = F)
