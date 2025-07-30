@@ -1,0 +1,31 @@
+#!/bin/bash -l
+#SBATCH --nodes 1
+#SBATCH --ntasks 1
+#SBATCH --cpus-per-task 1
+#SBATCH --mem=10G
+#SBATCH --time=72:00:00
+#SBATCH --mail-user=sagane.joye@unil.ch
+#SBATCH --error=snakemake.err
+
+conda activate snakemake2
+module load singularity
+
+# for checkpoints rules (if last more than 3 days):
+export SBATCH_OPEN_MODE="append"
+export SBATCH_SIGNAL=B:USR1@1100
+# for checkpoint main script:
+source /dcsrsoft/spack/external/ckptslurmjob/scripts/ckpt_methods.sh
+setup_ckpt
+
+cd /work/FAC/FBM/DEE/mrobinso/moult/sagane/moulting/snakemake_template_final
+
+# don't forget to bind the interproscan db !
+snakemake --profile slurm_ckpt --use-conda --use-singularity --unlock
+snakemake --profile slurm_ckpt --latency-wait 420 --use-conda --use-singularity --singularity-args "--bind /work/FAC/FBM/DEE/mrobinso/moult/sagane/packages/interproscan-5.65-97.0/data:/opt/interproscan/data"
+
+#snakemake --profile slurm --use-conda --use-singularity --unlock
+#snakemake --profile slurm --latency-wait 20 --use-conda --use-singularity --singularity-args "--bind /work/FAC/FBM/DEE/mrobinso/moult/sagane/packages/interproscan-5.65-97.0/data:/opt/interproscan/data"
+
+
+#--rerun-incomplete
+#launch_app

@@ -1,0 +1,24 @@
+configfile: 'config/config.yaml'
+
+include: 'rules/1_PreProcessing.smk'
+
+
+
+def retrieve_metadata_and_domains(wildcards):
+    checkpoint_output = checkpoints.get_proteome.get(**wildcards).output[0]
+    with open(checkpoint_output) as f:
+        proteome_names = [line.strip() for line in f]
+    metadata_tables = expand("results/Proteomes/metadata_table/{proteome_name}_table.tsv", proteome_name=proteome_names)
+    domain_files = expand("results/moultDB_input/domains/{proteome_name}_filt_domains.tsv", proteome_name=proteome_names)
+
+    return metadata_tables + domain_files
+
+# j'ai l'impression que dabord les domaines vont se lancer puis ensuite les metadata ! a verifier car si c'est le cas c'est pas partqiue
+
+rule all:
+    input:
+        "results/moultDB_input/prot_moult_pathways.tsv",
+        "results/moultDB_input/a3cat_filtered.tsv",
+        "results/moultDB_input/orthogroups.tsv",
+        retrieve_metadata_and_domains
+

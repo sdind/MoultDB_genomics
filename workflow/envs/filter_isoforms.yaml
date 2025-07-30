@@ -1,0 +1,11 @@
+channels:
+ - conda-forge
+ - bioconda
+ - anaconda
+ - defaults
+
+dependencies:
+  - biopython == 1.81
+  - seqiolib
+  - pandas == 2.1.1
+  - regex

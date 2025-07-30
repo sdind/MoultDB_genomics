@@ -1,0 +1,12 @@
+channels:
+ - conda-forge
+ - bioconda
+ - anaconda
+ - defaults
+
+dependencies:
+  - r-readr=2.1.4
+  - r-dplyr
+  - r-tidyr
+  - r-stringr
+  - r-ggplot2

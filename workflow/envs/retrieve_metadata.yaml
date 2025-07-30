@@ -1,0 +1,13 @@
+channels:
+ - conda-forge
+ - bioconda
+ - anaconda
+ - defaults
+
+dependencies:
+  - python=3.10.12
+  - bioconda::entrez-direct
+  - pandas
+  - biopython
+  - tqdm
+

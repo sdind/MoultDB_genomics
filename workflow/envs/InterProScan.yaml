@@ -1,0 +1,13 @@
+channels:
+ - bioconda
+ - conda-forge
+ - defaults
+
+dependencies:
+  - interproscan
+  - blast>=2.12
+  - hmmer>=3
+  - libgcc-ng>=12
+  - openjdk>=11,<17
+  - perl>=5.08
+  - python>=3
