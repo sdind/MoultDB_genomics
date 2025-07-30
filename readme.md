@@ -9,7 +9,7 @@ groups associated with moulting pathways.
 The pipeline performs the following steps:
 
 1. **Selection of High-Quality Proteomes**  
-   Filters the[A3cat 
+   Filters the [A3cat 
 table](https://a3cat.unil.ch) to retain 
 one representative genome per arthropod species, excluding low-quality 
 assemblies and downsampling overrepresented lineages.
@@ -23,7 +23,7 @@ gene.
 analysis.
 
 4. **Orthologous Group Inference**  
-   Runs [Orthologer](https://github.com/DylFul/Orthologer) to infer 
+   Runs [Orthologer](https://orthologer.ezlab.org) to infer 
 orthologous groups across the selected species.
 
 5. **Moulting Gene Identification**  
@@ -33,7 +33,7 @@ based on pathways curated by [Giulia Campli (PMID:
 
 6. **Domain Annotation**  
    Annotates each filtered proteome using 
-[InterProScan](https://www.ebi.ac.uk/interpro/interproscan.html), 
+[InterProScan](https://www.ebi.ac.uk/interpro/), 
 retaining high-confidence protein domains.
 
 ## Requirements
