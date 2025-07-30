@@ -2,7 +2,6 @@
 
 snakemake_dir_path: '/work/FAC/FBM/DEE/mrobinso/moult/sagane/moulting/snakemake_template_final'
 a3cat_table: '/work/FAC/FBM/DEE/mrobinso/moult/sagane/moulting/2023-09-05.tsv'
-#Dmel_moultgeneIDs: '/work/FAC/FBM/DEE/mrobinso/moult/sagane/moulting/dmel_moultgenes.csv'
 Dmel_moultgeneIDs: '/work/FAC/FBM/DEE/mrobinso/moult/GG_pipeline/Workdir/dmel_moultgenes.csv'
 phylogeny_tsv: '/work/FAC/FBM/DEE/mrobinso/moult/GG_pipeline/Workdir/phylogeny_tmp.tsv'
 pathway_controlled_voc: '/work/FAC/FBM/DEE/mrobinso/moult/sagane/moulting/pathway_controlled_voc.csv'
